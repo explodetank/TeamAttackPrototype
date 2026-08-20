@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=2 format=3 uid="uid://b151m6mu8t7ce"]
+
+[ext_resource type="Script" uid="uid://do8stbu5uh7s8" path="res://GameScripts/ResourcesBase/Skill.gd" id="1_ceg5b"]
+
+[resource]
+script = ExtResource("1_ceg5b")
+skill_name = "Magic Missiles"
+skill_description = "Summons a flurry of magic missiles to strike targets."
+resource_cost = 10
+metadata/_custom_type_script = "uid://do8stbu5uh7s8"

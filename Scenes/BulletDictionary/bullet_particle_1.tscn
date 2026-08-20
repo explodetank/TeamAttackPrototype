@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://ci37ha4pici5q"]
+
+[ext_resource type="PackedScene" uid="uid://botn6eefpujwg" path="res://Scenes/BulletDictionary/bullet_base.tscn" id="1_lh3m4"]
+[ext_resource type="Script" uid="uid://bct4hrlcigqdt" path="res://GameScripts/ResourcesBase/BulletData.gd" id="2_733q8"]
+[ext_resource type="Texture2D" uid="uid://cauhgce8dg1vt" path="res://Textures/ProjectileIcons/Sprite-Projectile1.png" id="2_pv0t5"]
+[ext_resource type="Texture2D" uid="uid://6dcn5k085rip" path="res://Textures/ProjectileIcons/Sprite-Projectile1Outer.png" id="3_733q8"]
+[ext_resource type="Texture2D" uid="uid://d3w8dlbkueer0" path="res://Textures/ProjectileIcons/Sprite-DotParticle.png" id="5_733q8"]
+[ext_resource type="Script" uid="uid://cjut4wkokgal" path="res://GameScripts/CoreScripts/timer.gd" id="6_b7t18"]
+
+[sub_resource type="Resource" id="Resource_pv0t5"]
+script = ExtResource("2_733q8")
+metadata/_custom_type_script = "uid://bct4hrlcigqdt"
+
+[sub_resource type="Curve" id="Curve_b7t18"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.70454544, 0.5393259), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_su2ui"]
+curve = SubResource("Curve_b7t18")
+
+[sub_resource type="Gradient" id="Gradient_g5o80"]
+colors = PackedColorArray(0.95829105, 0.5629187, 1, 1, 1, 0.09344697, 0.87381756, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_g204f"]
+gradient = SubResource("Gradient_g5o80")
+
+[sub_resource type="Curve" id="Curve_xe002"]
+_data = [Vector2(0.053030297, 1), 0.0, 0.0, 0, 0, Vector2(0.45454544, 0.75280905), -0.9887639, -0.9887639, 0, 0, Vector2(0.98484856, 0), -0.72153056, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_1qpc4"]
+width = 600
+curve = SubResource("Curve_xe002")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6e5n6"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(8, 8, 8)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+inherit_velocity_ratio = 0.75
+gravity = Vector3(0, -200, 0)
+scale_min = 1.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_1qpc4")
+color_initial_ramp = SubResource("GradientTexture1D_g204f")
+alpha_curve = SubResource("CurveTexture_su2ui")
+
+[node name="BulletObject" node_paths=PackedStringArray("sprite_array", "particle_array") instance=ExtResource("1_lh3m4")]
+gravity_scale = 2.0
+sprite_array = [NodePath("Sprite2D"), NodePath("Sprite2D2")]
+particle_array = [NodePath("GPUParticles2D")]
+destroy_particles = Array[int]([2])
+bullet_data = SubResource("Resource_pv0t5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="2"]
+self_modulate = Color(1, 0.3737805, 0.9656249, 1)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_pv0t5")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." index="3"]
+self_modulate = Color(1, 0, 0.5994506, 1)
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("3_733q8")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="4"]
+emitting = false
+amount = 25
+texture = ExtResource("5_733q8")
+lifetime = 0.5
+visibility_rect = Rect2(-3500, -3500, 7000, 7000)
+trail_lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_6e5n6")
+
+[node name="AnimationTimer" type="Timer" parent="." index="5" node_paths=PackedStringArray("get_sprite1", "get_sprite2")]
+wait_time = 0.1
+script = ExtResource("6_b7t18")
+get_sprite1 = NodePath("../Sprite2D")
+get_sprite2 = NodePath("../Sprite2D2")

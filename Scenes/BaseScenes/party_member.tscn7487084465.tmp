@@ -1,0 +1,191 @@
+[gd_scene load_steps=18 format=3 uid="uid://csmtaxaaq0ljq"]
+
+[ext_resource type="Script" uid="uid://bdfldv801yhps" path="res://GameScripts/CoreScripts/party_member.gd" id="1_icsqw"]
+[ext_resource type="Script" uid="uid://cpfvklfiph0k4" path="res://GameScripts/Classes/BaseAI.gd" id="1_maohk"]
+[ext_resource type="Script" uid="uid://do8stbu5uh7s8" path="res://GameScripts/ResourcesBase/Skill.gd" id="2_hloyu"]
+[ext_resource type="Script" uid="uid://dscs0w1wp10ws" path="res://GameScripts/ResourcesBase/PlayerAttributes.gd" id="2_ra8e5"]
+[ext_resource type="Script" uid="uid://k12v74mao4sp" path="res://GameScripts/Classes/HealthComponent.gd" id="2_w1kdd"]
+[ext_resource type="FontFile" uid="uid://cxfon226nthay" path="res://Fonts/prstartk.ttf" id="4_qkfwl"]
+[ext_resource type="Script" uid="uid://kwxvy87wjfxt" path="res://GameScripts/Classes/HitboxComponent.gd" id="5_wy6ne"]
+[ext_resource type="Texture2D" uid="uid://dvhnpj0pxpf7w" path="res://Textures/PartyMemberIcon/Sprite-TeamIcon1.png" id="7_ra8e5"]
+[ext_resource type="Texture2D" uid="uid://bdhxdomwvek6a" path="res://Textures/PartyMemberIcon/Sprite-TeamIcon2.png" id="8_hloyu"]
+[ext_resource type="Texture2D" uid="uid://d4jhf4lc7wpan" path="res://Textures/PartyMemberIcon/Sprite-MageIcon2.png" id="8_w2ki6"]
+[ext_resource type="Texture2D" uid="uid://dj6657jvc4slj" path="res://Textures/PartyMemberIcon/Sprite-TeamIcon3.png" id="9_mq6kd"]
+[ext_resource type="Texture2D" uid="uid://7qm5f2ikrb0m" path="res://Textures/PartyMemberIcon/Sprite-TeamIcon4.png" id="10_k5ndr"]
+
+[sub_resource type="Resource" id="Resource_hloyu"]
+resource_local_to_scene = true
+script = ExtResource("2_ra8e5")
+metadata/_custom_type_script = "uid://dscs0w1wp10ws"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wy6ne"]
+size = Vector2(48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0ipfu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_ra8e5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_hloyu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_mq6kd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_k5ndr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ra8e5"]
+bg_color = Color(0.3203125, 0.3203125, 0.3203125, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hloyu"]
+bg_color = Color(0, 0.77614975, 1, 1)
+corner_detail = 10
+shadow_color = Color(0.18431373, 0.18431373, 0.18431373, 0.6509804)
+anti_aliasing = false
+anti_aliasing_size = 0.68
+
+[node name="PartyMember" type="Control" node_paths=PackedStringArray("health_component", "ai_component", "hitbox_component", "defense_stat", "strength_stat", "speed_stat", "xp_bar", "char_name_text", "char_level_text", "hp_text") groups=["PartyMembers"]]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(2, 2)
+size_flags_horizontal = 3
+script = ExtResource("1_icsqw")
+health_component = NodePath("HealthComponent")
+ai_component = NodePath("AttackNode")
+hitbox_component = NodePath("HitboxComponent")
+defense_stat = NodePath("IconBuffer/StatsContainer/Defense")
+strength_stat = NodePath("IconBuffer/StatsContainer/Speed")
+speed_stat = NodePath("IconBuffer/StatsContainer/Strength")
+xp_bar = NodePath("IconBuffer/XPBar")
+char_name_text = NodePath("IconBuffer/CharName")
+char_level_text = NodePath("IconBuffer/LevelText")
+hp_text = NodePath("IconBuffer/StatsContainer/HealthText")
+char_resource = SubResource("Resource_hloyu")
+
+[node name="AttackNode" type="Node2D" parent="." node_paths=PackedStringArray("health_component", "direct_attack_timer")]
+script = ExtResource("1_maohk")
+attack_group = "Enemy"
+health_component = NodePath("../HealthComponent")
+direct_attack_timer = NodePath("../DirectAttackTimer")
+metadata/_custom_type_script = "uid://cpfvklfiph0k4"
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("2_w1kdd")
+metadata/_custom_type_script = "uid://k12v74mao4sp"
+
+[node name="DirectAttackTimer" type="Timer" parent="."]
+
+[node name="HitboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component", "hitbox_link", "parent_node")]
+collision_mask = 9
+script = ExtResource("5_wy6ne")
+health_component = NodePath("../HealthComponent")
+hitbox_link = NodePath("CollisionShape2D")
+parent_node = NodePath("..")
+metadata/_custom_type_script = "uid://kwxvy87wjfxt"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(24, 24)
+shape = SubResource("RectangleShape2D_wy6ne")
+
+[node name="IconBuffer" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 187.0
+offset_bottom = 48.0
+
+[node name="BorderIcon" type="AnimatedSprite2D" parent="IconBuffer"]
+self_modulate = Color(0, 0.69070625, 1, 1)
+position = Vector2(24, 24)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0ipfu")
+autoplay = "default"
+frame_progress = 0.5894923
+
+[node name="ClassIcon" type="Sprite2D" parent="IconBuffer/BorderIcon"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_w2ki6")
+
+[node name="CharName" type="RichTextLabel" parent="IconBuffer"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = -0.5
+offset_right = 270.0
+offset_bottom = 20.5
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/normal_font = ExtResource("4_qkfwl")
+text = "CoffeeGlow"
+vertical_alignment = 2
+
+[node name="LevelText" type="RichTextLabel" parent="IconBuffer"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -10.000001
+offset_right = 114.0
+offset_bottom = 10.999999
+scale = Vector2(0.4, 0.4)
+theme_override_fonts/normal_font = ExtResource("4_qkfwl")
+text = "LVL 0"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="StatsContainer" type="VBoxContainer" parent="IconBuffer"]
+layout_mode = 0
+offset_left = 52.5
+offset_top = 10.5
+offset_right = 296.24997
+offset_bottom = 101.74999
+scale = Vector2(0.4, 0.4)
+theme_override_constants/separation = 1
+
+[node name="HealthText" type="RichTextLabel" parent="IconBuffer/StatsContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/normal_font = ExtResource("4_qkfwl")
+text = "HP:100/100
+"
+vertical_alignment = 2
+
+[node name="Defense" type="RichTextLabel" parent="IconBuffer/StatsContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("4_qkfwl")
+text = "DEF:15
+"
+vertical_alignment = 2
+
+[node name="Speed" type="RichTextLabel" parent="IconBuffer/StatsContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("4_qkfwl")
+text = "SPD:25
+"
+vertical_alignment = 2
+
+[node name="Strength" type="RichTextLabel" parent="IconBuffer/StatsContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("4_qkfwl")
+text = "STR:10
+"
+vertical_alignment = 2
+
+[node name="XPBar" type="ProgressBar" parent="IconBuffer"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 50.0
+offset_right = 45.0
+offset_bottom = 52.5
+theme_override_styles/background = SubResource("StyleBoxFlat_ra8e5")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hloyu")
+show_percentage = false
+
+[connection signal="attacking" from="AttackNode" to="." method="_on_attack_node_attacking"]
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]

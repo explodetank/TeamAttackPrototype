@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://botn6eefpujwg"]
+
+[ext_resource type="Script" uid="uid://b5q3cjdtjkf4c" path="res://GameScripts/Classes/bullet_base.gd" id="1_e6dln"]
+[ext_resource type="Script" uid="uid://bhlu2q3q8selw" path="res://GameScripts/CoreScripts/rotate_velocity.gd" id="2_rivrm"]
+
+[node name="BulletObject" type="RigidBody2D" node_paths=PackedStringArray("lifetime_timer", "on_screen_object")]
+disable_mode = 1
+collision_layer = 8
+mass = 0.001
+script = ExtResource("1_e6dln")
+lifetime_timer = NodePath("LifetimeTimer")
+on_screen_object = NodePath("CollisionShape2D/OnScreen")
+metadata/_edit_group_ = true
+
+[node name="LifetimeTimer" type="Timer" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." node_paths=PackedStringArray("parent_node")]
+script = ExtResource("2_rivrm")
+parent_node = NodePath("..")
+
+[node name="OnScreen" type="VisibleOnScreenNotifier2D" parent="CollisionShape2D"]

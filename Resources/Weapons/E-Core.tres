@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="WeaponResource" format=3 uid="uid://ob312by2dtrq"]
+
+[ext_resource type="PackedScene" uid="uid://b5whncnojgodn" path="res://Scenes/BulletDictionary/gun_bullet.tscn" id="1_glmv7"]
+[ext_resource type="Script" uid="uid://baso2jef6pbyg" path="res://GameScripts/ResourcesBase/WeaponResource.gd" id="1_h5x8r"]
+[ext_resource type="Script" uid="uid://cbw1kug2jq20p" path="res://GameScripts/WeaponCategories/GunResource.gd" id="2_devyj"]
+[ext_resource type="Resource" uid="uid://c7i50ahsj27fh" path="res://Resources/WeaponAttacks/Gun/Sniper.tres" id="3_vsjo5"]
+
+[sub_resource type="Resource" id="Resource_3jghe"]
+script = ExtResource("2_devyj")
+accuracy = 65
+burst = 5
+burst_speed = 0.0
+projectile_speed = 2000.0
+projectile_type = ExtResource("1_glmv7")
+base_bullet_damage = 1
+metadata/_custom_type_script = "uid://cbw1kug2jq20p"
+
+[resource]
+script = ExtResource("1_h5x8r")
+weapon_name = "E-Core"
+weapon_description = "A ranged weapon that covers both extremes. Has a shotgun as it's main gun but supports a sniper as it's secondary."
+primary_attack = SubResource("Resource_3jghe")
+secondary_attack = ExtResource("3_vsjo5")
+metadata/_custom_type_script = "uid://baso2jef6pbyg"

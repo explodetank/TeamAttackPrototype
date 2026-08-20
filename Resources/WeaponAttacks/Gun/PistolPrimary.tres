@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GunScript" format=3 uid="uid://dq4b7wqpntq60"]
+
+[ext_resource type="PackedScene" uid="uid://b5whncnojgodn" path="res://Scenes/BulletDictionary/gun_bullet.tscn" id="1_cicxe"]
+[ext_resource type="Script" uid="uid://cbw1kug2jq20p" path="res://GameScripts/WeaponCategories/GunResource.gd" id="2_n5qo0"]
+
+[resource]
+script = ExtResource("2_n5qo0")
+accuracy = 90
+burst = 4
+projectile_speed = 3000.0
+projectile_type = ExtResource("1_cicxe")
+base_bullet_damage = 2
+metadata/_custom_type_script = "uid://cbw1kug2jq20p"

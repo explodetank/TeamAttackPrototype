@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://oq4r3o53r28l"]
+
+[ext_resource type="Script" uid="uid://duuta04ohw7ab" path="res://GameScripts/Classes/SpecialEffectNode.gd" id="1_yektm"]
+[ext_resource type="Texture2D" uid="uid://crk0vx2ln221i" path="res://Textures/SpecialEffects/Sprite-SmallHit1.png" id="2_jbeh8"]
+
+[node name="SpecialEffect" type="Node2D"]
+script = ExtResource("1_yektm")
+metadata/_custom_type_script = "uid://duuta04ohw7ab"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_jbeh8")

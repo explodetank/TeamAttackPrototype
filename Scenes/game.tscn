@@ -1,0 +1,249 @@
+[gd_scene format=3 uid="uid://c4vvncucp54cw"]
+
+[ext_resource type="Script" uid="uid://chyv8u1ux1esa" path="res://GameScripts/CoreScripts/main_script.gd" id="1_1l0tm"]
+[ext_resource type="PackedScene" uid="uid://csmtaxaaq0ljq" path="res://Scenes/BaseScenes/party_member.tscn" id="1_qxrlw"]
+[ext_resource type="Texture2D" uid="uid://dg53786623df4" path="res://Textures/Zones/Zone1/Sprite-Dungeon-1.png" id="2_h4fw4"]
+[ext_resource type="Texture2D" uid="uid://c27ha2xhsap6r" path="res://Textures/Zones/Zone1/Sprite-Dungeon-2.png" id="3_ldgsr"]
+[ext_resource type="Texture2D" uid="uid://cpxvcl1q71vdo" path="res://Textures/BorderTextures/Sprite-DialogBorder.png" id="4_3dryh"]
+[ext_resource type="Script" uid="uid://d134387sdf35o" path="res://GameScripts/CoreScripts/messagehandler.gd" id="5_i6g32"]
+[ext_resource type="FontFile" uid="uid://cxfon226nthay" path="res://Fonts/prstartk.ttf" id="5_wowpa"]
+[ext_resource type="Script" uid="uid://d3oxs3650qaue" path="res://GameScripts/CoreScripts/event_handler.gd" id="8_v158k"]
+[ext_resource type="Script" uid="uid://do8stbu5uh7s8" path="res://GameScripts/ResourcesBase/Skill.gd" id="9_nb51f"]
+[ext_resource type="Script" uid="uid://dscs0w1wp10ws" path="res://GameScripts/ResourcesBase/PlayerAttributes.gd" id="10_1phco"]
+[ext_resource type="Texture2D" uid="uid://cqys0e57mtk1q" path="res://Textures/GeneralIcons/Sprite-Button1.png" id="10_rku1e"]
+[ext_resource type="Script" uid="uid://0inv815umqak" path="res://GameScripts/CoreScripts/pause_button.gd" id="11_1phco"]
+[ext_resource type="Texture2D" uid="uid://bm2lq1q46eo6" path="res://Textures/GeneralIcons/Sprite-PauseIcon2.png" id="13_rfjv2"]
+[ext_resource type="Script" uid="uid://cusb1i2rbew4" path="res://GameScripts/CoreScripts/SparkEmitter.gd" id="15_nb51f"]
+[ext_resource type="Script" uid="uid://w4qt7nl2grvq" path="res://GameScripts/CoreScripts/silly_message_subsystem.gd" id="16_nnt18"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ldgsr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o5yvi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_h4fw4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ldgsr")
+}],
+"loop": true,
+"name": &"ZoneAnimation",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wowpa"]
+texture = ExtResource("4_3dryh")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+modulate_color = Color(0.034151815, 0.15976518, 0.71875, 1)
+
+[sub_resource type="Curve2D" id="Curve2D_v158k"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 320, 424, 0, 0, 0, 0, 1600, 424)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_nb51f"]
+resource_local_to_scene = true
+script = ExtResource("10_1phco")
+internal_name = "CoffeeGlow"
+metadata/_custom_type_script = "uid://dscs0w1wp10ws"
+
+[sub_resource type="Resource" id="Resource_nnt18"]
+resource_local_to_scene = true
+script = ExtResource("10_1phco")
+internal_name = "Bird_XD"
+metadata/_custom_type_script = "uid://dscs0w1wp10ws"
+
+[sub_resource type="Resource" id="Resource_ewbju"]
+resource_local_to_scene = true
+script = ExtResource("10_1phco")
+internal_name = "Alien Screen"
+metadata/_custom_type_script = "uid://dscs0w1wp10ws"
+
+[sub_resource type="Resource" id="Resource_85qyi"]
+resource_local_to_scene = true
+script = ExtResource("10_1phco")
+base_damage_scale = 3
+base_damage = 2
+internal_name = "Alien Eye"
+metadata/_custom_type_script = "uid://dscs0w1wp10ws"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rfjv2"]
+texture = ExtResource("10_rku1e")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nb51f"]
+texture = ExtResource("10_rku1e")
+modulate_color = Color(0.0734691, 0.70352805, 1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1phco"]
+texture = ExtResource("10_rku1e")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ewbju"]
+
+[sub_resource type="Curve2D" id="Curve2D_7t8sx"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 128, 0, 0, 0, 0, 0, 1792, 0)
+}
+point_count = 2
+
+[node name="Game" type="Node2D" unique_id=1911515565 node_paths=PackedStringArray("idle_message_timer", "purple_fire_timer", "buffer_scene")]
+script = ExtResource("1_1l0tm")
+idle_message_timer = NodePath("IdleTimer")
+purple_fire_timer = NodePath("PurpleFireTimer")
+buffer_scene = NodePath("Buffer")
+
+[node name="IdleTimer" type="Timer" parent="." unique_id=504977656]
+
+[node name="PurpleFireTimer" type="Timer" parent="." unique_id=1155325901]
+wait_time = 0.25
+
+[node name="StepSpeed" type="Timer" parent="." unique_id=1536845612]
+wait_time = 0.1
+one_shot = true
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=802662824]
+offset_left = -144.0
+offset_top = -144.0
+offset_right = 2056.0
+offset_bottom = 1224.0
+color = Color(0, 0, 0, 1)
+
+[node name="Buffer" type="Control" parent="." unique_id=1999701653]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="BackgroundHolder" type="Panel" parent="Buffer" unique_id=1713036706]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 192.0
+offset_right = 1600.0
+offset_bottom = 576.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ldgsr")
+
+[node name="Background" type="AnimatedSprite2D" parent="Buffer/BackgroundHolder" unique_id=1420043719]
+position = Vector2(640, 192)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_o5yvi")
+animation = &"ZoneAnimation"
+
+[node name="TextBox" type="Panel" parent="Buffer" unique_id=177241152]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 624.0
+offset_right = 693.3334
+offset_bottom = 728.0
+scale = Vector2(3, 3)
+theme_override_styles/panel = SubResource("StyleBoxTexture_wowpa")
+script = ExtResource("5_i6g32")
+
+[node name="DialogContainer" type="VBoxContainer" parent="Buffer/TextBox" unique_id=1315874937]
+layout_mode = 0
+offset_left = 10.66667
+offset_top = 5.3333406
+offset_right = 1152.8889
+offset_bottom = 215.33334
+scale = Vector2(0.45, 0.45)
+theme_override_constants/separation = 0
+
+[node name="Steps" type="RichTextLabel" parent="Buffer/TextBox" unique_id=833918312]
+layout_mode = 0
+offset_left = 2.6666667
+offset_top = -13.33334
+offset_right = 221.33336
+offset_bottom = 8.000004
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/normal_font = ExtResource("5_wowpa")
+text = "Steps: 0000
+"
+vertical_alignment = 2
+
+[node name="EventHandler" type="Control" parent="Buffer" unique_id=1655107315]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_v158k")
+
+[node name="EnemySpawn" type="Path2D" parent="Buffer/EventHandler" unique_id=777033234]
+curve = SubResource("Curve2D_v158k")
+
+[node name="SpawnPath" type="PathFollow2D" parent="Buffer/EventHandler/EnemySpawn" unique_id=550008381]
+position = Vector2(320, 424)
+
+[node name="EnemyInformation" type="FlowContainer" parent="Buffer/EventHandler" unique_id=64505620]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 1904.0
+offset_bottom = 144.0
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 11
+
+[node name="EncounterTimer" type="Timer" parent="Buffer/EventHandler" unique_id=2022489323]
+wait_time = 0.2
+
+[node name="PartyMembers" type="HBoxContainer" parent="Buffer" unique_id=451835403]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 960.0
+offset_right = 960.0
+offset_bottom = 1008.0
+scale = Vector2(2, 2)
+alignment = 1
+
+[node name="PartyMember" parent="Buffer/PartyMembers" unique_id=637642653 instance=ExtResource("1_qxrlw")]
+layout_mode = 2
+internal_name = "CoffeeGlow"
+char_resource = SubResource("Resource_nb51f")
+
+[node name="PartyMember2" parent="Buffer/PartyMembers" unique_id=257490295 instance=ExtResource("1_qxrlw")]
+layout_mode = 2
+internal_name = "Bird_XD"
+char_resource = SubResource("Resource_nnt18")
+
+[node name="PartyMember3" parent="Buffer/PartyMembers" unique_id=2093690419 instance=ExtResource("1_qxrlw")]
+layout_mode = 2
+internal_name = "Alien Screen"
+char_resource = SubResource("Resource_ewbju")
+
+[node name="PartyMember4" parent="Buffer/PartyMembers" unique_id=1027410722 instance=ExtResource("1_qxrlw")]
+layout_mode = 2
+internal_name = "Alien Eye"
+char_resource = SubResource("Resource_85qyi")
+
+[node name="PauseButton" type="Button" parent="Buffer" unique_id=137488934]
+self_modulate = Color(0, 0.11883511, 0.6484375, 1)
+layout_mode = 0
+offset_left = 1699.0
+offset_top = 560.0
+offset_right = 1731.0
+offset_bottom = 592.0
+scale = Vector2(1.9, 1.9)
+theme_override_styles/normal = SubResource("StyleBoxTexture_rfjv2")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nb51f")
+theme_override_styles/hover = SubResource("StyleBoxTexture_1phco")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ewbju")
+toggle_mode = true
+script = ExtResource("11_1phco")
+
+[node name="PauseIcon" type="Sprite2D" parent="Buffer/PauseButton" unique_id=773897396]
+position = Vector2(15.999919, 16)
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("13_rfjv2")
+
+[node name="PurpleBulletPath" type="Path2D" parent="Buffer" unique_id=723214428]
+curve = SubResource("Curve2D_7t8sx")
+script = ExtResource("15_nb51f")
+
+[node name="PurpleSpawnPath" type="PathFollow2D" parent="Buffer/PurpleBulletPath" unique_id=2021377272]
+position = Vector2(128, 0)
+
+[node name="SillyMessageSubsystem" type="Node" parent="." unique_id=175664599]
+script = ExtResource("16_nnt18")
+
+[connection signal="timeout" from="StepSpeed" to="." method="_on_step_speed_timeout"]

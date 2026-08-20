@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dftntxvfoqfpb"]
+
+[ext_resource type="Script" uid="uid://dqw58pmgymera" path="res://Scripts/CoreScripts/isolated_scene.gd" id="1_cxouf"]
+[ext_resource type="Script" uid="uid://dscxbqtven7ad" path="res://Scripts/CoreScripts/marker_2d.gd" id="2_bfpf4"]
+
+[node name="IsolatedScene" type="Node2D"]
+script = ExtResource("1_cxouf")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(907, 534)
+script = ExtResource("2_bfpf4")
+
+[node name="Timer" type="Timer" parent="Marker2D"]
+
+[connection signal="timeout" from="Marker2D/Timer" to="Marker2D" method="_on_timer_timeout"]

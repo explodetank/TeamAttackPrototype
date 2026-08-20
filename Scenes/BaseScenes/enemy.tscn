@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://kfek1koi0fmx"]
+
+[ext_resource type="Script" uid="uid://cpfvklfiph0k4" path="res://GameScripts/Classes/BaseAI.gd" id="1_0830c"]
+[ext_resource type="Script" uid="uid://bo82xs4mfaxi" path="res://GameScripts/CoreScripts/enemy.gd" id="1_ghaa6"]
+[ext_resource type="Script" uid="uid://cc418qxrls2kk" path="res://GameScripts/ResourcesBase/EntityAttributes.gd" id="2_df3a8"]
+[ext_resource type="Script" uid="uid://k12v74mao4sp" path="res://GameScripts/Classes/HealthComponent.gd" id="2_ghaa6"]
+[ext_resource type="Script" uid="uid://cqnvkksk7v2il" path="res://GameScripts/Classes/ShakeNode.gd" id="7_df3a8"]
+
+[sub_resource type="Resource" id="Resource_df3a8"]
+resource_local_to_scene = true
+script = ExtResource("2_df3a8")
+internal_name = "Enemy"
+metadata/_custom_type_script = "uid://cc418qxrls2kk"
+
+[node name="Enemy" type="Control" node_paths=PackedStringArray("ai_component", "health_component", "hitbox_component") groups=["Enemy"]]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ghaa6")
+resource = SubResource("Resource_df3a8")
+ai_component = NodePath("AttackNode")
+health_component = NodePath("HealthComponent")
+hitbox_component = NodePath("")
+internal_name = "Enemy"
+
+[node name="AttackNode" type="Node2D" parent="." node_paths=PackedStringArray("health_component", "direct_attack_timer")]
+script = ExtResource("1_0830c")
+attack_group = "PartyMembers"
+health_component = NodePath("../HealthComponent")
+direct_attack_timer = NodePath("")
+can_attack = false
+metadata/_custom_type_script = "uid://cpfvklfiph0k4"
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("2_ghaa6")
+max_health = 25
+metadata/_custom_type_script = "uid://k12v74mao4sp"
+
+[node name="ShakeNode" type="Node" parent="."]
+script = ExtResource("7_df3a8")
+shake_intensity = 100.0
+metadata/_custom_type_script = "uid://cqnvkksk7v2il"
+
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]

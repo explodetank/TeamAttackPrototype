@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://ch7tsg3608pts"]
+
+[sub_resource type="GDScript" id="GDScript_iw865"]
+script/source = "extends Skill
+
+func trigger(targets:Array,incoming_damage:int) -> int:
+	var roll_chance = randf()
+	
+	if roll_chance > 0.5:
+		incoming_damage = 0
+	print(incoming_damage)
+	return incoming_damage
+"
+
+[resource]
+script = SubResource("GDScript_iw865")
+metadata/_custom_type_script = "uid://do8stbu5uh7s8"

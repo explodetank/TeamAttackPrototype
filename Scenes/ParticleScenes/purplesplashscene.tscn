@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfhve3s72kgbf"]
+
+[ext_resource type="Texture2D" uid="uid://d3w8dlbkueer0" path="res://Textures/ProjectileIcons/Sprite-DotParticle.png" id="1_djd5l"]
+[ext_resource type="Material" uid="uid://bb7qh6b03h5u0" path="res://Resources/ParticleResources/PurpleSplashParticle.tres" id="2_5gnnq"]
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+emitting = false
+amount = 7
+texture = ExtResource("1_djd5l")
+lifetime = 0.75
+one_shot = true
+speed_scale = 1.2
+explosiveness = 0.9
+process_material = ExtResource("2_5gnnq")

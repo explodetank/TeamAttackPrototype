@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=2 format=3 uid="uid://c8ndhocl6dyto"]
+
+[ext_resource type="Script" uid="uid://do8stbu5uh7s8" path="res://GameScripts/ResourcesBase/Skill.gd" id="1_cb24u"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_cb24u")
+skill_name = "Rainstorm"
+skill_type = 1
+skill_description = "Cast a long lasting rainstorm, dropping damaging drops onto enemies."
+resource_cost = 75
+cooldown_type = 1
+metadata/_custom_type_script = "uid://do8stbu5uh7s8"

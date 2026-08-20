@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://chggs4tcoh2bs"]
+
+[ext_resource type="Texture2D" uid="uid://0ywhitq85jge" path="res://Textures/BorderTextures/Sprite-EnemyBorder.png" id="1_hnilg"]
+[ext_resource type="Script" uid="uid://cyaasn8677pyu" path="res://GameScripts/CoreScripts/enemy_info.gd" id="1_moilo"]
+[ext_resource type="FontFile" uid="uid://cxfon226nthay" path="res://Fonts/prstartk.ttf" id="2_bcbh5"]
+[ext_resource type="Script" uid="uid://cqnvkksk7v2il" path="res://GameScripts/Classes/ShakeNode.gd" id="4_ey1of"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hnilg"]
+texture = ExtResource("1_hnilg")
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+modulate_color = Color(0, 0.35185313, 0.80859375, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hnilg"]
+bg_color = Color(1, 1, 1, 1)
+anti_aliasing = false
+
+[node name="EnemyInfo" type="ColorRect" unique_id=2146114220]
+custom_minimum_size = Vector2(305, 120)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1615.0
+offset_bottom = -960.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_moilo")
+
+[node name="Buffer" type="Panel" parent="." unique_id=185523074]
+layout_mode = 0
+offset_right = 152.5
+offset_bottom = 60.0
+scale = Vector2(2, 2)
+theme_override_styles/panel = SubResource("StyleBoxTexture_hnilg")
+
+[node name="EnemyName" type="RichTextLabel" parent="Buffer" unique_id=1956812242]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 9.5
+offset_right = 276.0
+offset_bottom = 54.5
+scale = Vector2(0.5, 0.5)
+theme_override_constants/outline_size = 0
+theme_override_fonts/normal_font = ExtResource("2_bcbh5")
+text = "Celestial Hydra"
+fit_content = true
+scroll_active = false
+vertical_alignment = 1
+
+[node name="HP" type="RichTextLabel" parent="Buffer" unique_id=1044633277]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 32.0
+offset_right = 260.0
+offset_bottom = 58.666718
+scale = Vector2(0.5, 0.5)
+theme_override_constants/line_separation = 1
+theme_override_fonts/normal_font = ExtResource("2_bcbh5")
+theme_override_font_sizes/normal_font_size = 16
+text = "HP: 100/100
+"
+fit_content = true
+scroll_active = false
+vertical_alignment = 1
+
+[node name="HPBar" type="ProgressBar" parent="Buffer" unique_id=2071052833]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 48.0
+offset_right = 144.0
+offset_bottom = 52.333336
+theme_override_styles/fill = SubResource("StyleBoxFlat_hnilg")
+value = 100.0
+show_percentage = false
+
+[node name="ShakeNode" type="Node" parent="Buffer" unique_id=631693856]
+script = ExtResource("4_ey1of")
+shake_intensity = 25.0
+metadata/_custom_type_script = "uid://cqnvkksk7v2il"

@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://bhx8en7h5e5pl"]
+
+[ext_resource type="PackedScene" uid="uid://kfek1koi0fmx" path="res://Scenes/BaseScenes/enemy.tscn" id="1_378a2"]
+[ext_resource type="Script" uid="uid://cc418qxrls2kk" path="res://GameScripts/ResourcesBase/EntityAttributes.gd" id="2_cweim"]
+[ext_resource type="Texture2D" uid="uid://c7bfm3suadqm2" path="res://Textures/EnemySprite/Sprite-EnemySprite2.png" id="3_yucdg"]
+[ext_resource type="Script" uid="uid://kwxvy87wjfxt" path="res://GameScripts/Classes/HitboxComponent.gd" id="4_cweim"]
+
+[sub_resource type="Resource" id="Resource_ey3b7"]
+resource_local_to_scene = true
+script = ExtResource("2_cweim")
+internal_name = "Ancient Core"
+metadata/_custom_type_script = "uid://cc418qxrls2kk"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yp63n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_yucdg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yucdg"]
+size = Vector2(148, 174)
+
+[node name="Enemy" instance=ExtResource("1_378a2")]
+resource = SubResource("Resource_ey3b7")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." index="3"]
+scale = Vector2(1.6, 1.6)
+sprite_frames = SubResource("SpriteFrames_yp63n")
+
+[node name="HitboxComponent" type="Area2D" parent="." index="4" node_paths=PackedStringArray("health_component", "hitbox_link", "parent_node")]
+collision_mask = 4
+script = ExtResource("4_cweim")
+health_component = NodePath("../HealthComponent")
+hitbox_link = NodePath("CollisionShape2D")
+parent_node = NodePath("..")
+metadata/_custom_type_script = "uid://kwxvy87wjfxt"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" index="0"]
+shape = SubResource("RectangleShape2D_yucdg")

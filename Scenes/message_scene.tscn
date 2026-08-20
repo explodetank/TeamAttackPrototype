@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://bse152kogm6cq"]
+
+[ext_resource type="Script" uid="uid://cyai7y6yei56p" path="res://GameScripts/CoreScripts/message_scene.gd" id="1_gmolq"]
+[ext_resource type="FontFile" uid="uid://cxfon226nthay" path="res://Fonts/prstartk.ttf" id="1_hbuh7"]
+[ext_resource type="Texture2D" uid="uid://b12frqv85l7lm" path="res://Textures/MessageIcons/Sprite-IconEmpty.png" id="2_gmolq"]
+[ext_resource type="Texture2D" uid="uid://cfob3amdjje4h" path="res://Textures/MessageIcons/Sprite-IconEmpty2.png" id="3_kw6gy"]
+[ext_resource type="Texture2D" uid="uid://bdcgmxxq58fgy" path="res://Textures/MessageIcons/Sprite-SpeakSprite.png" id="4_cq58u"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ldgsr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gmolq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_kw6gy")
+}],
+"loop": false,
+"name": &"default",
+"speed": 4.0
+}]
+
+[node name="MessageScene" type="Control"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_gmolq")
+
+[node name="MessageText" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 3.0
+offset_right = 1919.0
+offset_bottom = 33.0
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("1_hbuh7")
+text = "Timmy decends into the dungeon
+"
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="BorderSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(12.592591, 16.296295)
+scale = Vector2(1.8402777, 1.7939792)
+sprite_frames = SubResource("SpriteFrames_ldgsr")
+
+[node name="MessageIcon" type="Sprite2D" parent="BorderSprite"]
+texture = ExtResource("4_cq58u")

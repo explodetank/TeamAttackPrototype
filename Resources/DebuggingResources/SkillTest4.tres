@@ -1,0 +1,21 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cwt44cihkysqj"]
+
+[sub_resource type="GDScript" id="GDScript_l82fn"]
+script/source = "extends Skill
+
+func trigger(targets:Array,incoming_damage:int) -> int:
+	if not self.on_cooldown:
+		print(\"Performed Heavy Strike!\")
+		self.start_cooldown()
+	else: print(\"Skill on cooldown!\")
+	
+	return incoming_damage
+"
+
+[resource]
+resource_local_to_scene = true
+script = SubResource("GDScript_l82fn")
+skill_name = "Heavy Strike"
+skill_description = "Unleash a slow yet powerful strike. Accuracy increases with Strength."
+skill_cooldown = 17.0
+metadata/_custom_type_script = "uid://do8stbu5uh7s8"
